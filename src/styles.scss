@@ -1,1 +1,119 @@
+@import '../src/app/shared/variables.scss';
 /* You can add global styles to this file, and also import other style files */
+html, body { height: calc(100% - 20px); }
+body { 
+    margin: 0;
+    padding: 20px 100px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+// Global style classes
+.app-header {
+    margin-bottom: 20px;
+    .app-header-container {
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        .navigation {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            .title {
+                margin: 0;
+                font-size: 28px;
+            }
+            .icon {
+                scale: 1.3;
+                cursor: pointer;
+            }
+        }
+        .action {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: $deep-purple;
+            .icon {
+                scale: 1.3;
+                cursor: pointer;
+            }
+            .name {
+                margin: 0;
+                font-size: 18px;
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+// Radio button style
+.mat-mdc-radio-button.mat-accent {
+    --mdc-radio-selected-focus-icon-color: #7154e4;
+    --mdc-radio-selected-hover-icon-color: #7154e4;
+    --mdc-radio-selected-icon-color: #7154e4;
+    --mdc-radio-selected-pressed-icon-color: #7154e4;
+    --mat-radio-checked-ripple-color: transparent;
+}
+
+.mdc-radio__background {
+	display: flex !important;
+	position: relative;
+	box-sizing: border-box;
+	width: 20px;
+	height: 20px;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+.mdc-radio__inner-circle {
+    position: relative !important;
+	border-width: 20px !important;
+}
+.mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:not(:checked) + .mdc-radio__background .mdc-radio__outer-circle {
+    border: 1px solid $light-grey !important;
+}
+
+// Mat input style
+.mdc-text-field--outlined .mat-mdc-form-field-infix, .mdc-text-field--no-label .mat-mdc-form-field-infix {
+    display: flex;
+	padding-top: 6px !important;
+	padding-bottom: 6px !important;
+    min-height: 40px;
+}
+
+.mat-mdc-text-field-wrapper {
+    border: 1px solid $deep-purple !important;
+    border-radius: 6px !important;
+    padding: 0 10px !important;
+}
+
+.mdc-notched-outline {
+    display: none !important;
+}
+
+.mat-mdc-form-field-hint-wrapper {
+    padding: 0 2px !important;
+}
+
+.mat-mdc-form-field-infix {
+    input {
+        font-size: 16px !important;
+    }
+    input::placeholder {
+        color: $light-grey !important;
+    }
+}
+
+.mat-mdc-icon-button {
+    width: 24px !important;
+    height: 24px !important;
+    padding: 0 !important;
+}
+.mat-mdc-icon-button:hover {
+    background-color: transparent !important;
+}
+
+// Mat expansion panel
+.mat-expansion-panel-body {
+	padding: 0 !important;
+}

@@ -1,0 +1,293 @@
+@import '../../shared/variables.scss';
+
+.wrapper {
+    height: 100%;
+}
+.user-cards {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 16px;
+
+    .gray-card {
+        background-color: rgb(245, 245, 245);
+        box-shadow: none;
+        border-radius: 6px;
+    }
+
+    .name-content {
+        padding: 16px;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        height: 100%;
+        gap: 8px;
+        .name {
+            margin: 0;
+            font-size: 16px;
+        }
+        .organization {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 300;
+        }
+    }
+
+    .vehicle-content {
+        padding: 16px 10px;
+        display: flex;
+        gap: 10px;
+        .vehicle-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+
+        .info-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+
+            .fleet-group {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 14px;
+                font-weight: 400;
+            }
+            .brand {
+                font-size: 16px;
+            }
+            .model-year {
+                font-size: 16px;
+            }
+        }
+        .icon-container {
+            display: flex;
+            align-items: center;
+            border-radius: 50%;
+            border: 3px solid $deep-purple;
+            scale: 0.8;
+            width: fit-content;
+            height: fit-content;
+            position: absolute;
+            top: 8px;
+            right: 5px;
+            cursor: pointer;
+            .icon {
+                color: $deep-purple;
+                scale: 0.9;
+            }
+        }
+    }
+}
+
+.refresh {
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+    border: 3px solid $deep-purple;
+    scale: 0.8;
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    .icon {
+        color: $deep-purple;
+        scale: 0.9;
+    }
+}
+
+.trip-odometer {
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+}
+.radio-group {
+    display: flex;
+    gap: 10px;
+    .radio-button {
+        border: solid 1px $deep-purple;
+        border-radius: 6px;
+        width: 50%;
+    }
+}
+
+.radio-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    .icon {
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+    }
+}
+
+.checked {
+    border: 2px solid $green !important;
+}
+
+.failed {
+    border: 2px solid $red !important;
+}
+
+.na {
+    border: 2px solid $gray !important;
+}
+
+.stateless {
+    border: 2px solid $light-grey;
+}
+
+.address-legend {
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+    .address {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 400;
+    }
+    .legend {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 42px;
+        .legend-item {
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            gap: 6px;
+        }
+    }
+}
+
+// Expansion panels content classes
+.expansion-panel-container {
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+}
+.expansion-panel {
+    box-shadow: none !important;
+    border: 1px solid $deep-purple;
+    // This prevents a sibling (two expansion panels in the same div) from growing if the other is expanded
+    height: fit-content;
+}
+.panel-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.content {
+    display: flex;
+    flex-flow: column;
+}
+.status {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+.status-inner {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 16px;
+}
+
+.status-group {
+    display: flex;
+    flex-flow: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+}
+.divider {
+    // this to make the divider full width, because the expansion panel has padding
+    margin: 0 -16px;
+    border-top-color: #cecece;
+}
+.checked-row {
+    background-color: $faded-green;
+}
+.failed-row {
+    background-color: $faded-red;
+}
+.na-row {
+    background-color: $faded-light-grey;
+}
+
+// Footer classes
+.footer {
+    position: sticky;
+    top: 100%;
+    width: 100%;
+    z-index: 1000;
+}
+
+.operational-form {
+    display: flex;
+    flex-flow: row;
+    gap: 20px;
+    margin-top: 20px;
+    .operational-container {
+        display: flex;
+        flex-flow: row;
+        gap: 20px;
+        align-items: center;
+        .operational {
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+        }
+    }
+}
+
+
+// General color and width classes
+.green {
+    color: $green;
+}
+.red {
+    color: $red;
+}
+.gray {
+    color: $light-grey;
+}
+.black {
+    color: $black;
+}
+.purple {
+    color: $deep-purple;
+}
+
+.w-100 {
+    width: 100%;
+}
+.w-40 {
+    width: 40%;
+}
+.w-60 {
+    width: 60%;
+}
+.w-50 {
+    width: 50%;
+}
+
+// Responsive classes
+
+// x-small devices - <576px
