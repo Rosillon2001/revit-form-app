@@ -2,7 +2,7 @@
 
 .wrapper {
     height: fit-content;
-    margin-bottom: 120px;
+    padding-bottom: 120px;
 }
 .user-cards {
     display: flex;
@@ -261,11 +261,11 @@
     width: 100%;
     background-color: white;
     position: fixed;
+    z-index: 1000;
     bottom: 0;
 }
 .footer {
     width: calc(100% - 200px);
-    z-index: 1000;
     padding-bottom: 10px;
 }
 
@@ -323,7 +323,7 @@
 // x-small devices - <576px
 @media (max-width: 576px) {
     .wrapper {
-        margin-bottom: 170px;
+        padding-bottom: 170px;
     }
     .user-cards {
         flex-flow: column;
@@ -370,7 +370,7 @@
 // small devices - >=576px and <768px
 @media (min-width: 576px) and (max-width: 768px) {
     .wrapper {
-        margin-bottom: 170px;
+        padding-bottom: 170px;
     }
     .user-cards {
         flex-flow: column;
@@ -417,7 +417,7 @@
 // medium devices - >=768px and <992px
 @media (min-width: 768px) and (max-width: 992px) {
     .wrapper {
-        margin-bottom: 170px;
+        padding-bottom: 170px;
     }
     .user-cards {
         flex-flow: column;
