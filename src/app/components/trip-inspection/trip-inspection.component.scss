@@ -1,7 +1,8 @@
 @import '../../shared/variables.scss';
 
 .wrapper {
-    height: 100%;
+    height: fit-content;
+    margin-bottom: 120px;
 }
 .user-cards {
     display: flex;
@@ -107,6 +108,7 @@
     display: flex;
     flex-flow: row;
     gap: 20px;
+    margin-bottom: 6px;
 }
 .radio-group {
     display: flex;
@@ -132,6 +134,28 @@
         height: 20px;
         font-size: 20px;
     }
+}
+
+.radio-legend {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    .icon {
+        width: 14px;
+        height: 14px;
+        font-size: 14px;
+    }
+}
+
+.legend-icon {
+    width: 20px;
+    height: 20px;
+    font-size: 20px;
 }
 
 .checked {
@@ -178,6 +202,7 @@
     display: flex;
     flex-flow: row;
     gap: 20px;
+    margin-top: 20px;
 }
 .expansion-panel {
     box-shadow: none !important;
@@ -232,18 +257,22 @@
 }
 
 // Footer classes
-.footer {
-    position: sticky;
-    top: 100%;
+.footer-wrapper {
     width: 100%;
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+}
+.footer {
+    width: calc(100% - 200px);
     z-index: 1000;
+    padding-bottom: 10px;
 }
 
 .operational-form {
     display: flex;
     flex-flow: row;
     gap: 20px;
-    margin-top: 20px;
     .operational-container {
         display: flex;
         flex-flow: row;
@@ -253,6 +282,7 @@
             display: flex;
             flex-flow: row;
             align-items: center;
+            justify-content: space-between;
         }
     }
 }
@@ -291,3 +321,149 @@
 // Responsive classes
 
 // x-small devices - <576px
+@media (max-width: 576px) {
+    .wrapper {
+        margin-bottom: 170px;
+    }
+    .user-cards {
+        flex-flow: column;
+        gap: 10px;
+    }
+    .trip-odometer {
+        flex-flow: column;
+        gap: 10px;
+    }
+    .address-legend {
+        flex-flow: column;
+        gap: 10px;
+    }
+    .expansion-panel-container {
+        flex-flow: column;
+        gap: 10px;
+        margin-right: 0px !important;
+        margin-top: 10px !important;
+    }
+    .w-50 {
+        width: 100%;
+    }
+    .footer {
+        width: calc(100% - 40px);
+    }
+    .operational-form {
+        flex-flow: column;
+        gap: 0px;
+        .operational-container {
+            flex-flow: column;
+            gap: 0px;
+            .operational {
+                width: 100%;
+            }
+            .check-container {
+                width: 100%;
+                position: relative;
+                left: -10px;
+            }
+        }
+    }
+}
+
+// small devices - >=576px and <768px
+@media (min-width: 576px) and (max-width: 768px) {
+    .wrapper {
+        margin-bottom: 170px;
+    }
+    .user-cards {
+        flex-flow: column;
+        gap: 10px;
+    }
+    .trip-odometer {
+        flex-flow: column;
+        gap: 10px;
+    }
+    .address-legend {
+        flex-flow: column;
+        gap: 10px;
+    }
+    .expansion-panel-container {
+        flex-flow: column;
+        gap: 10px;
+        margin-right: 0px !important;
+        margin-top: 10px !important;
+    }
+    .w-50 {
+        width: 100%;
+    }
+    .footer {
+        width: calc(100% - 100px);
+    }
+    .operational-form {
+        flex-flow: column;
+        gap: 0px;
+        .operational-container {
+            flex-flow: column;
+            gap: 0px;
+            .operational {
+                width: 100%;
+            }
+            .check-container {
+                width: 100%;
+                position: relative;
+                left: -10px;
+            }
+        }
+    }
+}
+
+// medium devices - >=768px and <992px
+@media (min-width: 768px) and (max-width: 992px) {
+    .wrapper {
+        margin-bottom: 170px;
+    }
+    .user-cards {
+        flex-flow: column;
+        gap: 10px;
+    }
+    .trip-odometer {
+        flex-flow: column;
+        gap: 10px;
+    }
+    .address-legend {
+        flex-flow: column;
+        gap: 10px;
+    }
+    .expansion-panel-container {
+        flex-flow: column;
+        gap: 10px;
+        margin-right: 0px !important;
+        margin-top: 10px !important;
+    }
+    .w-50 {
+        width: 100%;
+    }
+    .footer {
+        width: calc(100% - 100px);
+    }
+    .operational-form {
+        flex-flow: column;
+        gap: 0px;
+        .operational-container {
+            flex-flow: column;
+            gap: 0px;
+            .operational {
+                width: 100%;
+            }
+            .check-container {
+                width: 100%;
+                position: relative;
+                left: -10px;
+            }
+        }
+    }
+}
+
+// large devices - >=992px and <1200px
+@media (min-width: 992px) and (max-width: 1200px) {
+    .footer {
+        width: calc(100% - 100px);
+    }
+}

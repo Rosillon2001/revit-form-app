@@ -78,7 +78,7 @@
    <!-- Address and legend -->
    <div class="address-legend">
       <form class="address w-50" [formGroup]="form">
-         <mat-form-field appearance="outline" class="w-100">
+         <mat-form-field appearance="outline" class="w-100 no-subscript">
             <input matInput placeholder="Address" formControlName="address">
             <div class="refresh" (click)="toggleRefresh()" matSuffix>
                <mat-icon class="icon" [@refresh]="refresh">sync</mat-icon>
@@ -88,21 +88,21 @@
       <div class="legend w-50">
          <!-- Checked -->
          <div class="legend-item">
-            <div class="radio-wrapper checked">
+            <div class="radio-legend checked">
                <mat-icon class="icon green">check</mat-icon>
             </div>
             <span class="label">Checked</span>
          </div>
          <!-- Failed -->
          <div class="legend-item">
-            <div class="radio-wrapper failed">
+            <div class="radio-legend failed">
                <mat-icon class="icon red">close</mat-icon>
             </div>
             <span class="label">Failed</span>
          </div>
          <!-- Not Applicable -->
          <div class="legend-item">
-            <mat-icon class="icon black">block</mat-icon>
+            <mat-icon class="legend-icon black">block</mat-icon>
             <span class="label">Not Applicable</span>
          </div>
       </div>
@@ -363,14 +363,14 @@
    </div>
 
    <!-- In Car -->
-   <div class="expansion-panel-container" style="margin-right: 20px; margin-top: 20px;">
+   <div class="expansion-panel-container" style="margin-right: 20px;">
       <mat-expansion-panel class="w-50 expansion-panel" (opened)="inCarPanelState = true" (closed)="inCarPanelState = false" hideToggle>
          <mat-expansion-panel-header style="height: 42px; padding: 0 8px;">
             <mat-panel-title style="margin: 0;">
                   <div class="panel-title w-60">
                      <mat-icon *ngIf="inCarPanelState === false" class="purple">add</mat-icon>
                      <mat-icon *ngIf="inCarPanelState === true" class="purple">remove</mat-icon>
-                     <span>Exterior of Vehicle</span>
+                     <span>In Car</span>
                   </div>
                   <!-- Custom radio buttons -->
                   <div class="status w-40">
@@ -421,11 +421,14 @@
       </mat-expansion-panel>
    </div>
 
-   <!-- floating footer with textfield, operational vehicles radio buttons and rquires maintenance checkbox -->
+</div>
+
+<!-- floating footer with textfield, operational vehicles radio buttons and rquires maintenance checkbox -->
+<div class="footer-wrapper">
    <div class="footer">
       <form [formGroup]="form" class="w-100 operational-form">
-         <mat-form-field appearance="outline" class="w-50">
-            <textarea matInput placeholder="Notes" formControlName="notes"></textarea>
+         <mat-form-field appearance="outline" class="w-50 no-subscript">
+            <textarea matInput placeholder="Notes" formControlName="notes" style="resize: none;"></textarea>
          </mat-form-field>
          <div class="operational-container w-50">
             <div class="operational">
@@ -435,9 +438,10 @@
                   <mat-radio-button [value]="false">No</mat-radio-button>
                </mat-radio-group>
             </div>
-            <mat-checkbox class="checkbox" formControlName="requires-maintenance">Vehicle Requires Maintenance</mat-checkbox>
+            <div class="check-container">
+               <mat-checkbox class="checkbox" formControlName="requires-maintenance">Vehicle Requires Maintenance</mat-checkbox>
+            </div>
          </div>
       </form>
    </div>
-
 </div>
