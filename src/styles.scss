@@ -122,7 +122,20 @@ body {
 	padding: 0 !important;
 }
 
-
+// Custom mat 
+// We add a class to prevent overwriting the default styles
+// Checked mat checkbox
+.custom-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background {
+    background-color: white !important;
+    border: 2px solid $green !important;
+}
+// Check mat checkbox color
+.custom-checkbox .mdc-checkbox .mdc-checkbox__native-control:enabled ~ .mdc-checkbox__background .mdc-checkbox__checkmark {
+	color: $green !important;
+}
+.custom-checkbox .mat-mdc-checkbox-ripple {
+	display: none ;
+}
 // Responsive Styling
 
 // x-small devices - <576px
