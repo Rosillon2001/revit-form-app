@@ -15,6 +15,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 // Animations 
 import { trigger, state, style, animate, transition } from '@angular/animations';
+// Services
+import { ClientServiceService } from '../../shared/services/clients/client-service.service';
 
 @Component({
   selector: 'app-trip-inspection',
@@ -52,10 +54,29 @@ export class TripInspectionComponent implements OnInit{
   public fb: FormBuilder = new FormBuilder();
   public form: FormGroup = this.fb.group({});
 
+  // Clients
+  public clients: any[] = [];
+  public client: any = {};
 
-  constructor() { }
+  constructor(
+    private clientService: ClientServiceService,
+  ) { }
 
   ngOnInit(): void {
+    this.initForm();
+    // get clients
+    this.clientService.getClients().subscribe((clients) => {
+      this.clients = clients;
+      console.log(this.clients)
+    });
+    // Get client by id
+    this.clientService.getClient(1).subscribe((client) => {
+      console.log(client);
+      this.client = client;
+    });
+  }
+
+  public initForm() {
     this.form = this.fb.group({
       'trip': ['pre-trip', Validators.required],
       'odometer': [''],
@@ -137,6 +158,27 @@ export class TripInspectionComponent implements OnInit{
         'warning-lights': status,
       });
     }
+  }
+
+  // API mock calls
+  public updateClient() {
+    console.log(this.client);
+    this.client.name = 'Pepito Perez';
+    console.log(this.client);
+    this.clientService.updateClient(this.client).subscribe((response) => {
+      if (response === null) {
+        console.log("Client updated")
+      }
+    });
+
+    // Get client by id
+    this.clientService.getClient(1).subscribe((response) => {
+      console.log(response);
+      if (response) {
+        console.log("Client found")
+        this.client = response;
+      }
+    });
   }
 
 }

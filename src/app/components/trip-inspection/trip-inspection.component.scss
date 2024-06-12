@@ -263,9 +263,11 @@
     position: fixed;
     z-index: 1000;
     bottom: 0;
+    left: 0;
+    padding-top: 10px;
 }
 .footer {
-    width: calc(100% - 200px);
+    padding: 0 100px;
     padding-bottom: 10px;
 }
 
@@ -347,7 +349,7 @@
         width: 100%;
     }
     .footer {
-        width: calc(100% - 40px);
+        padding: 0 20px;
     }
     .operational-form {
         flex-flow: column;
@@ -394,7 +396,7 @@
         width: 100%;
     }
     .footer {
-        width: calc(100% - 100px);
+        padding: 0 50px;
     }
     .operational-form {
         flex-flow: column;
@@ -441,7 +443,7 @@
         width: 100%;
     }
     .footer {
-        width: calc(100% - 100px);
+        padding: 0 50px;
     }
     .operational-form {
         flex-flow: column;
@@ -464,6 +466,6 @@
 // large devices - >=992px and <1200px
 @media (min-width: 992px) and (max-width: 1200px) {
     .footer {
-        width: calc(100% - 100px);
+        padding: 0 50px;
     }
 }

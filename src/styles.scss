@@ -3,18 +3,29 @@
 html, body { height: calc(100% - 20px); }
 body { 
     margin: 0;
-    padding: 20px 100px;
+    padding: 40px 100px;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 
 // Global style classes
 .app-header {
-    margin-bottom: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    z-index: 1000;
+    background-color: white;
+    padding-top: 6px;
     .app-header-container {
         margin: 0;
         display: flex;
+        width: 100%;
         justify-content: space-between;
+        padding: 0 100px;
         .navigation {
             display: flex;
             align-items: center;
@@ -136,15 +147,19 @@ body {
 .custom-checkbox .mat-mdc-checkbox-ripple {
 	display: none ;
 }
+.custom-checkbox .mdc-checkbox .mdc-checkbox__native-control:focus:checked ~ .mdc-checkbox__ripple {
+    background-color: transparent !important;
+}
 // Responsive Styling
 
 // x-small devices - <576px
 @media (max-width: 576px) {
     body {
-        padding: 20px;
+        padding: 70px 20px;
     }
     .app-header {
         .app-header-container {
+            padding: 0 20px;
             .navigation {
                 .title {
                     font-size: 20px;
@@ -168,10 +183,11 @@ body {
 // small devices - >=576px and <768px
 @media (min-width: 576px) and (max-width: 768px) {
     body {
-        padding: 20px 50px;
+        padding: 70px 50px;
     }
     .app-header {
         .app-header-container {
+            padding: 0 50px;
             .navigation {
                 .title {
                     font-size: 22px;
@@ -195,10 +211,11 @@ body {
 // medium devices - >=768px and <992px
 @media (min-width: 768px) and (max-width: 992px) {
     body {
-        padding: 20px 50px;
+        padding: 70px 50px;
     }
     .app-header {
         .app-header-container {
+            padding: 0 50px;
             .navigation {
                 .title {
                     font-size: 24px;
@@ -222,10 +239,11 @@ body {
 // large devices - >=992px and <1200px
 @media (min-width: 992px) and (max-width: 1200px) {
     body {
-        padding: 20px 50px;
+        padding: 70px 50px;
     }
     .app-header {
         .app-header-container {
+            padding: 0 50px;
             .navigation {
                 .title {
                     font-size: 26px;
