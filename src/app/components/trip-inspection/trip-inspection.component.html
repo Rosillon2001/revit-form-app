@@ -71,7 +71,7 @@
 
       <form [formGroup]="form" class="w-50">
          <mat-form-field appearance="outline" class="w-100">
-            <input matInput type="number" placeholder="Odometer Reading" formControlName="odometer" onlyNumber>
+            <input matInput type="number" placeholder="Odometer Reading" formControlName="odometer" inputmode="numeric" onlyNumber>
             <!-- mat hint -->
             <mat-hint align="start">Last Recorded Odometer Reading: {{client?.odometer}}</mat-hint>
          </mat-form-field>
