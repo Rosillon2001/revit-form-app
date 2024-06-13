@@ -38,15 +38,15 @@
             <div class="info-container">
                <!-- Vehicle Fleet Group -->
                <div class="fleet-group">
-                  <span class="label">Group A</span>
+                  <span class="label">{{client?.car_group}}</span>
                </div>
                <!-- Vehicle brand -->
                <div class="brand">
-                  <span class="label">FORD</span>
+                  <span class="label">{{client?.car_brand}}</span>
                </div>
                <!-- Vehicle model & Year -->
                <div class="model-year">
-                  <span class="label">Model: 50th Aniversary | Year: 2015</span>
+                  <span class="label">Model: {{client?.car_model}} | Year: {{client?.car_year}} | Color: {{client?.car_color}}</span>
                </div>
 
                <div class="icon-container" (click)="toggleRotate()">
@@ -70,7 +70,7 @@
          <mat-form-field appearance="outline" class="w-100">
             <input matInput placeholder="Odometer Reading" formControlName="odometer">
             <!-- mat hint -->
-            <mat-hint align="start">Last Recorded Odometer Reading: 253260</mat-hint>
+            <mat-hint align="start">Last Recorded Odometer Reading: {{client?.odometer}}</mat-hint>
          </mat-form-field>
       </form>
    </div>
