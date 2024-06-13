@@ -150,6 +150,41 @@ body {
 .custom-checkbox .mdc-checkbox .mdc-checkbox__native-control:focus:checked ~ .mdc-checkbox__ripple {
     background-color: transparent !important;
 }
+
+// Snackbar
+.mat-mdc-snack-bar-container {
+    &.success {
+        --mdc-snackbar-container-color: #e6e3ff;
+
+        .mat-mdc-snack-bar-container .mdc-snackbar__surface {
+            color: black !important;
+        }
+        .mat-mdc-button.mat-mdc-snack-bar-action {
+            color: $deep-purple !important;
+        }
+        .mdc-snackbar__label {
+            color: $gray !important;
+        }
+    }
+
+    &.error {
+    --mdc-snackbar-container-color: #dc3d3d;
+
+    .mat-mdc-snack-bar-container .mdc-snackbar__surface {
+        color: #fff;
+    }
+    .mat-mdc-button.mat-mdc-snack-bar-action {
+        color: #000 !important;
+    }
+    }
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__label {
+    &.success {
+        color: $green !important;
+    }
+}
+
 // Responsive Styling
 
 // x-small devices - <576px

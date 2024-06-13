@@ -18,13 +18,15 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 // Services
 import { ClientServiceService } from '../../shared/services/clients/client-service.service';
 import { SnackBarService } from '../../shared/services/snackbar/snack-bar.service';
+// Directives
+import { OnlyNumberDirective } from '../../shared/directives/only-number.directive';
 
 @Component({
   selector: 'app-trip-inspection',
   standalone: true,
   imports: [
     MatIconModule, MatCardModule, MatRadioModule, ReactiveFormsModule, CommonModule, MatInputModule, MatButtonModule,
-    MatExpansionModule, MatDividerModule, MatCheckboxModule
+    MatExpansionModule, MatDividerModule, MatCheckboxModule, OnlyNumberDirective
   ],
   templateUrl: './trip-inspection.component.html',
   styleUrl: './trip-inspection.component.scss',
@@ -66,18 +68,7 @@ export class TripInspectionComponent implements OnInit{
 
   ngOnInit(): void {
     this.initForm();
-    // get clients
-    this.clientService.getClients().subscribe((clients) => {
-      this.clients = clients;
-      console.log(this.clients)
-    });
-    // Get client by id
-    this.clientService.getClient(2).subscribe((client) => {
-      console.log(client);
-      this.client = client;
-      this.form.patchValue(client);
-      console.log(this.form.value);
-    });
+    this.getClientData();
   }
 
   public initForm() {
@@ -142,6 +133,19 @@ export class TripInspectionComponent implements OnInit{
     else {
       this.form.get(formControl)?.setValue(status);
     }
+    // Check if all the children checks are checked, failed, or na. If so, set the main status to the same status
+    // Exterior
+    if (this.form.get('exterior_checks.tires')?.value === status && this.form.get('exterior_checks.spare_wheel')?.value === status && this.form.get('exterior_checks.lights')?.value === status && this.form.get('exterior_checks.physical_damage')?.value === status && this.form.get('exterior_checks.leaking_fluids')?.value === status) {
+      this.form.get('exterior_status')?.setValue(status);
+    }
+    // Under Hood
+    if (this.form.get('under_hood_checks.vehicle_fluids')?.value === status && this.form.get('under_hood_checks.windshield_fluid')?.value === status && this.form.get('under_hood_checks.battery_connections')?.value === status) {
+      this.form.get('under_hood_status')?.setValue(status);
+    }
+    // In Car
+    if (this.form.get('in_car_checks.warning_lights')?.value === status) {
+      this.form.get('in_car_status')?.setValue(status);
+    }
     // if the form control is the main status, set all the checks to the same status
     if (formControl === 'exterior_status') {
       this.form.get('exterior_checks')?.setValue({
@@ -165,21 +169,54 @@ export class TripInspectionComponent implements OnInit{
   }
 
   // API mock calls
-  public updateClient() {
-    console.log(this.client);
-    this.client.name = 'Pepito Perez';
-    console.log(this.client);
-    this.clientService.updateClient(this.client).subscribe((response) => {
-      if (response === null) {
-        this.snackBarService.show("Client updated", 'Close', 3000, 'success');
-      }
-    });
 
-    // Get client by id
-    this.clientService.getClient(1).subscribe((response) => {
-      console.log(response);
-      if (response) {
-        this.client = response;
+  public getClientData() {
+    // Get client by id, but random every time
+    let randomClientId = Math.floor(Math.random() * 5) + 1;
+    this.clientService.getClient(randomClientId).subscribe((client) => {
+      console.log(client);
+      this.client = client;
+      this.form.patchValue(client);
+      // reset the status of the status checks
+      this.form.get('exterior_status')?.setValue('');
+      this.form.get('under_hood_status')?.setValue('');
+      this.form.get('in_car_status')?.setValue('');
+      // Set the status of the status checks if all the children checks are checked, failed, or na
+      // Exterior
+      if (client.exterior_checks.tires === 'checked' && client.exterior_checks.spare_wheel === 'checked' && client.exterior_checks.lights === 'checked' && client.exterior_checks.physical_damage === 'checked' && client.exterior_checks.leaking_fluids === 'checked') {
+        this.form.get('exterior_status')?.setValue('checked');
+      } else if (client.exterior_checks.tires === 'failed' && client.exterior_checks.spare_wheel === 'failed' && client.exterior_checks.lights === 'failed' && client.exterior_checks.physical_damage === 'failed' && client.exterior_checks.leaking_fluids === 'failed') {
+        this.form.get('exterior_status')?.setValue('failed');
+      } else if (client.exterior_checks.tires === 'na' && client.exterior_checks.spare_wheel === 'na' && client.exterior_checks.lights === 'na' && client.exterior_checks.physical_damage === 'na' && client.exterior_checks.leaking_fluids === 'na') {
+        this.form.get('exterior_status')?.setValue('na');
+      }
+      // Under Hood
+      if (client.under_hood_checks.vehicle_fluids === 'checked' && client.under_hood_checks.windshield_fluid === 'checked' && client.under_hood_checks.battery_connections === 'checked') {
+        this.form.get('under_hood_status')?.setValue('checked');
+      } else if (client.under_hood_checks.vehicle_fluids === 'failed' && client.under_hood_checks.windshield_fluid === 'failed' && client.under_hood_checks.battery_connections === 'failed') {
+        this.form.get('under_hood_status')?.setValue('failed');
+      } else if (client.under_hood_checks.vehicle_fluids === 'na' && client.under_hood_checks.windshield_fluid === 'na' && client.under_hood_checks.battery_connections === 'na') {
+        this.form.get('under_hood_status')?.setValue('na');
+      }
+      // In Car
+      if (client.in_car_checks.warning_lights === 'checked') {
+        this.form.get('in_car_status')?.setValue('checked');
+      } else if (client.in_car_checks.warning_lights === 'failed') {
+        this.form.get('in_car_status')?.setValue('failed');
+      } else if (client.in_car_checks.warning_lights === 'na') {
+        this.form.get('in_car_status')?.setValue('na');
+      }
+
+    });
+  }
+
+  public updateClient() {
+    console.log(this.form.value);
+    let updatedClient = { ...this.client, ...this.form.value };
+    console.log(updatedClient);
+    this.clientService.updateClient(updatedClient).subscribe((response) => {
+      if (response === null) {
+        this.snackBarService.show("Client updated", 'Close', 300000, 'success');
       }
     });
   }

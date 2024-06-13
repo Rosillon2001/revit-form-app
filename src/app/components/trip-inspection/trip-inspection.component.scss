@@ -40,6 +40,8 @@
         .vehicle-image {
             width: 70px;
             height: 70px;
+            // Prevent deformation when the other content is bigger and takes more space
+            min-width: 70px;
             border-radius: 50%;
             img {
                 width: 100%;

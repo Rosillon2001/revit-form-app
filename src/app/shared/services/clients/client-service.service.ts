@@ -6,6 +6,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 // SnackBar Service
 import { SnackBarService } from '../snackbar/snack-bar.service';
+// Spinner service
+import { SpinnerLoaderService } from '../loader/spinner-loader.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,8 @@ export class ClientServiceService {
 
   constructor(
     private http: HttpClient,
-    private snackBarService: SnackBarService
+    private snackBarService: SnackBarService,
+    private spinnerLoaderService: SpinnerLoaderService
   ) { }
 
   getClients(): Observable<any[]> {
@@ -24,6 +27,8 @@ export class ClientServiceService {
       retry(3),
       catchError((error: HttpErrorResponse) => {
         console.error(error);
+        // stop spinner
+        this.spinnerLoaderService.setSpinnerState(false);
         this.snackBarService.show("Error getting clients", 'Close', 3000, 'error');
         return throwError(error);
       })
@@ -35,6 +40,8 @@ export class ClientServiceService {
       retry(3),
       catchError((error: HttpErrorResponse) => {
         console.error(error);
+        // stop spinner
+        this.spinnerLoaderService.setSpinnerState(false);
         this.snackBarService.show("Error getting client's info", 'Close', 3000, 'error');
         return throwError(error);
       })
@@ -47,6 +54,8 @@ export class ClientServiceService {
       retry(3),
       catchError((error: HttpErrorResponse) => {
         console.error(error);
+        // stop spinner
+        this.spinnerLoaderService.setSpinnerState(false);
         this.snackBarService.show("Error updating client's info", 'Close', 3000, 'error');
         return throwError(error);
       })
