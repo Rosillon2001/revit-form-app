@@ -4,6 +4,8 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 // rxjs
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
+// SnackBar Service
+import { SnackBarService } from '../snackbar/snack-bar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +14,17 @@ export class ClientServiceService {
 
   private clientsUrl = 'api/clients/';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private snackBarService: SnackBarService
+  ) { }
 
   getClients(): Observable<any[]> {
     return this.http.get<any[]>(this.clientsUrl).pipe(
       retry(3),
       catchError((error: HttpErrorResponse) => {
         console.error(error);
+        this.snackBarService.show("Error getting clients", 'Close', 3000, 'error');
         return throwError(error);
       })
     );
@@ -29,6 +35,7 @@ export class ClientServiceService {
       retry(3),
       catchError((error: HttpErrorResponse) => {
         console.error(error);
+        this.snackBarService.show("Error getting client's info", 'Close', 3000, 'error');
         return throwError(error);
       })
     );
@@ -40,6 +47,7 @@ export class ClientServiceService {
       retry(3),
       catchError((error: HttpErrorResponse) => {
         console.error(error);
+        this.snackBarService.show("Error updating client's info", 'Close', 3000, 'error');
         return throwError(error);
       })
     );

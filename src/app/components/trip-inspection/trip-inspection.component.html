@@ -19,11 +19,11 @@
          <mat-card-content class="name-content">
             <!-- User name -->
             <div class="name">
-               <span class="label">User</span>
+               <span class="label">{{client?.name}}</span>
             </div>
             <!-- Organization name -->
             <div class="organization">
-               <span class="label">Organization</span>
+               <span class="label">{{client?.org_name}}</span>
             </div>
          </mat-card-content>
       </mat-card>
@@ -32,7 +32,7 @@
          <mat-card-content class="vehicle-content">
             <!-- Vehicle image -->
             <div class="vehicle-image">
-               <img mat-card-image src="../../../assets/images/mustang.webp" alt="vehicle">
+               <img mat-card-image [src]="client.image" alt="vehicle">
             </div>
             <!-- info container -->
             <div class="info-container">
@@ -61,8 +61,8 @@
    <div class="trip-odometer w-100">
       <form [formGroup]="form" class="w-50">
          <mat-radio-group class="radio-group" formControlName="trip">
-            <mat-radio-button class="radio-button" value="pre-trip">Pre-Trip</mat-radio-button>
-            <mat-radio-button class="radio-button" value="post-trip">Post-Trip</mat-radio-button>
+            <mat-radio-button class="radio-button" value="pre_trip">Pre-Trip</mat-radio-button>
+            <mat-radio-button class="radio-button" value="post_trip">Post-Trip</mat-radio-button>
          </mat-radio-group>
       </form>
 
@@ -123,15 +123,15 @@
                <div class="status w-40">
                   <!-- Checked, failed & NA -->
                   <form [formGroup]="form" class="status w-100">
-                     <mat-radio-group class="status-group w-100" formControlName="exterior-status">
-                        <div class="radio-wrapper checked" (click)="changeStatus('checked', 'exterior-status', $event)">
-                           <mat-icon class="icon green" *ngIf="form.get('exterior-status')?.value === 'checked'">check</mat-icon>
+                     <mat-radio-group class="status-group w-100" formControlName="exterior_status">
+                        <div class="radio-wrapper checked" (click)="changeStatus('checked', 'exterior_status', $event)">
+                           <mat-icon class="icon green" *ngIf="form.get('exterior_status')?.value === 'checked'">check</mat-icon>
                         </div>
-                        <div class="radio-wrapper failed" (click)="changeStatus('failed', 'exterior-status', $event)">
-                           <mat-icon class="icon red" *ngIf="form.get('exterior-status')?.value === 'failed'">close</mat-icon>
+                        <div class="radio-wrapper failed" (click)="changeStatus('failed', 'exterior_status', $event)">
+                           <mat-icon class="icon red" *ngIf="form.get('exterior_status')?.value === 'failed'">close</mat-icon>
                         </div>
-                        <div class="radio-wrapper na" (click)="changeStatus('na', 'exterior-status', $event)">
-                           <mat-icon class="icon black" *ngIf="form.get('exterior-status')?.value === 'na'">block</mat-icon>
+                        <div class="radio-wrapper na" (click)="changeStatus('na', 'exterior_status', $event)">
+                           <mat-icon class="icon black" *ngIf="form.get('exterior_status')?.value === 'na'">block</mat-icon>
                         </div>
                      </mat-radio-group>
                   </form>
@@ -143,115 +143,115 @@
          <!-- Child custom radio buttons -->
          <form [formGroup]="form" class="content" >
             <!-- Tires -->
-            <div class="status-inner" formGroupName="exterior-checks" 
-               [ngClass]="[form.get('exterior-checks.tires')?.value === 'checked' ? 'checked-row': '',
-               form.get('exterior-checks.tires')?.value === 'failed' ? 'failed-row': '',
-               form.get('exterior-checks.tires')?.value === 'na' ? 'na-row' : '']">
+            <div class="status-inner" formGroupName="exterior_checks" 
+               [ngClass]="[form.get('exterior_checks.tires')?.value === 'checked' ? 'checked-row': '',
+               form.get('exterior_checks.tires')?.value === 'failed' ? 'failed-row': '',
+               form.get('exterior_checks.tires')?.value === 'na' ? 'na-row' : '']">
                <span class="label">Tires</span>
                <mat-radio-group class="status-group" formControlName="tires">
-                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'exterior-checks.tires', $event)"
-                  [ngClass]="[form.get('exterior-checks.tires')?.value === 'checked' ? 'checked' : 'stateless']">
-                     <mat-icon class="icon green" *ngIf="form.get('exterior-checks.tires')?.value === 'checked'">check</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'exterior_checks.tires', $event)"
+                  [ngClass]="[form.get('exterior_checks.tires')?.value === 'checked' ? 'checked' : 'stateless']">
+                     <mat-icon class="icon green" *ngIf="form.get('exterior_checks.tires')?.value === 'checked'">check</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'exterior-checks.tires', $event)"
-                  [ngClass]="[form.get('exterior-checks.tires')?.value === 'failed' ? 'failed' : 'stateless']">
-                     <mat-icon class="icon red" *ngIf="form.get('exterior-checks.tires')?.value === 'failed'">close</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'exterior_checks.tires', $event)"
+                  [ngClass]="[form.get('exterior_checks.tires')?.value === 'failed' ? 'failed' : 'stateless']">
+                     <mat-icon class="icon red" *ngIf="form.get('exterior_checks.tires')?.value === 'failed'">close</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'exterior-checks.tires', $event)"
-                  [ngClass]="[form.get('exterior-checks.tires')?.value === 'na' ? 'na' : 'stateless']">
-                     <mat-icon class="icon black" *ngIf="form.get('exterior-checks.tires')?.value === 'na'">block</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'exterior_checks.tires', $event)"
+                  [ngClass]="[form.get('exterior_checks.tires')?.value === 'na' ? 'na' : 'stateless']">
+                     <mat-icon class="icon black" *ngIf="form.get('exterior_checks.tires')?.value === 'na'">block</mat-icon>
                   </div>
                </mat-radio-group>
             </div>
             <mat-divider class="divider"></mat-divider>
             <!-- /Tires -->
             <!-- Spare Wheel -->
-            <div class="status-inner" formGroupName="exterior-checks"
-               [ngClass]="[form.get('exterior-checks.spare-wheel')?.value === 'checked' ? 'checked-row': '',
-               form.get('exterior-checks.spare-wheel')?.value === 'failed' ? 'failed-row': '',
-               form.get('exterior-checks.spare-wheel')?.value === 'na' ? 'na-row' : '']">
+            <div class="status-inner" formGroupName="exterior_checks"
+               [ngClass]="[form.get('exterior_checks.spare_wheel')?.value === 'checked' ? 'checked-row': '',
+               form.get('exterior_checks.spare_wheel')?.value === 'failed' ? 'failed-row': '',
+               form.get('exterior_checks.spare_wheel')?.value === 'na' ? 'na-row' : '']">
                <span class="label">Spare Wheel and Tire</span>
-               <mat-radio-group class="status-group" formControlName="spare-wheel">
-                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'exterior-checks.spare-wheel', $event)"
-                  [ngClass]="[form.get('exterior-checks.spare-wheel')?.value === 'checked' ? 'checked' : 'stateless']">
-                     <mat-icon class="icon green" *ngIf="form.get('exterior-checks.spare-wheel')?.value === 'checked'">check</mat-icon>
+               <mat-radio-group class="status-group" formControlName="spare_wheel">
+                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'exterior_checks.spare_wheel', $event)"
+                  [ngClass]="[form.get('exterior_checks.spare_wheel')?.value === 'checked' ? 'checked' : 'stateless']">
+                     <mat-icon class="icon green" *ngIf="form.get('exterior_checks.spare_wheel')?.value === 'checked'">check</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'exterior-checks.spare-wheel', $event)"
-                  [ngClass]="[form.get('exterior-checks.spare-wheel')?.value === 'failed' ? 'failed' : 'stateless']">
-                     <mat-icon class="icon red" *ngIf="form.get('exterior-checks.spare-wheel')?.value === 'failed'">close</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'exterior_checks.spare_wheel', $event)"
+                  [ngClass]="[form.get('exterior_checks.spare_wheel')?.value === 'failed' ? 'failed' : 'stateless']">
+                     <mat-icon class="icon red" *ngIf="form.get('exterior_checks.spare_wheel')?.value === 'failed'">close</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'exterior-checks.spare-wheel', $event)"
-                  [ngClass]="[form.get('exterior-checks.spare-wheel')?.value === 'na' ? 'na' : 'stateless']">
-                     <mat-icon class="icon black" *ngIf="form.get('exterior-checks.spare-wheel')?.value === 'na'">block</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'exterior_checks.spare_wheel', $event)"
+                  [ngClass]="[form.get('exterior_checks.spare_wheel')?.value === 'na' ? 'na' : 'stateless']">
+                     <mat-icon class="icon black" *ngIf="form.get('exterior_checks.spare_wheel')?.value === 'na'">block</mat-icon>
                   </div>
                </mat-radio-group>
             </div>
             <!-- /Spare Wheel -->
             <mat-divider class="divider"></mat-divider>
             <!-- Lights -->
-            <div class="status-inner" formGroupName="exterior-checks"
-               [ngClass]="[form.get('exterior-checks.lights')?.value === 'checked' ? 'checked-row': '',
-               form.get('exterior-checks.lights')?.value === 'failed' ? 'failed-row': '',
-               form.get('exterior-checks.lights')?.value === 'na' ? 'na-row' : '']">
+            <div class="status-inner" formGroupName="exterior_checks"
+               [ngClass]="[form.get('exterior_checks.lights')?.value === 'checked' ? 'checked-row': '',
+               form.get('exterior_checks.lights')?.value === 'failed' ? 'failed-row': '',
+               form.get('exterior_checks.lights')?.value === 'na' ? 'na-row' : '']">
                <span class="label">Lights</span>
                <mat-radio-group class="status-group" formControlName="lights">
-                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'exterior-checks.lights', $event)" 
-                  [ngClass]="[form.get('exterior-checks.lights')?.value === 'checked' ? 'checked' : 'stateless']">
-                     <mat-icon class="icon green" *ngIf="form.get('exterior-checks.lights')?.value === 'checked'">check</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'exterior_checks.lights', $event)" 
+                  [ngClass]="[form.get('exterior_checks.lights')?.value === 'checked' ? 'checked' : 'stateless']">
+                     <mat-icon class="icon green" *ngIf="form.get('exterior_checks.lights')?.value === 'checked'">check</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'exterior-checks.lights', $event)"
-                  [ngClass]="[form.get('exterior-checks.lights')?.value === 'failed' ? 'failed' : 'stateless']">
-                     <mat-icon class="icon red" *ngIf="form.get('exterior-checks.lights')?.value === 'failed'">close</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'exterior_checks.lights', $event)"
+                  [ngClass]="[form.get('exterior_checks.lights')?.value === 'failed' ? 'failed' : 'stateless']">
+                     <mat-icon class="icon red" *ngIf="form.get('exterior_checks.lights')?.value === 'failed'">close</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'exterior-checks.lights', $event)"
-                  [ngClass]="[form.get('exterior-checks.lights')?.value === 'na' ? 'na' : 'stateless']">
-                     <mat-icon class="icon black" *ngIf="form.get('exterior-checks.lights')?.value === 'na'">block</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'exterior_checks.lights', $event)"
+                  [ngClass]="[form.get('exterior_checks.lights')?.value === 'na' ? 'na' : 'stateless']">
+                     <mat-icon class="icon black" *ngIf="form.get('exterior_checks.lights')?.value === 'na'">block</mat-icon>
                   </div>
                </mat-radio-group>
             </div>
             <!-- /Lights -->
             <mat-divider class="divider"></mat-divider>
             <!-- Physical Damage -->
-            <div class="status-inner" formGroupName="exterior-checks"
-               [ngClass]="[form.get('exterior-checks.physical-damage')?.value === 'checked' ? 'checked-row': '',
-               form.get('exterior-checks.physical-damage')?.value === 'failed' ? 'failed-row': '',
-               form.get('exterior-checks.physical-damage')?.value === 'na' ? 'na-row' : '']">
+            <div class="status-inner" formGroupName="exterior_checks"
+               [ngClass]="[form.get('exterior_checks.physical_damage')?.value === 'checked' ? 'checked-row': '',
+               form.get('exterior_checks.physical_damage')?.value === 'failed' ? 'failed-row': '',
+               form.get('exterior_checks.physical_damage')?.value === 'na' ? 'na-row' : '']">
                <span class="label">Physical Damage</span>
-               <mat-radio-group class="status-group" formControlName="physical-damage">
-                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'exterior-checks.physical-damage', $event)"
-                  [ngClass]="[form.get('exterior-checks.physical-damage')?.value === 'checked' ? 'checked' : 'stateless']">
-                     <mat-icon class="icon green" *ngIf="form.get('exterior-checks.physical-damage')?.value === 'checked'">check</mat-icon>
+               <mat-radio-group class="status-group" formControlName="physical_damage">
+                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'exterior_checks.physical_damage', $event)"
+                  [ngClass]="[form.get('exterior_checks.physical_damage')?.value === 'checked' ? 'checked' : 'stateless']">
+                     <mat-icon class="icon green" *ngIf="form.get('exterior_checks.physical_damage')?.value === 'checked'">check</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'exterior-checks.physical-damage', $event)"
-                  [ngClass]="[form.get('exterior-checks.physical-damage')?.value === 'failed' ? 'failed' : 'stateless']">
-                     <mat-icon class="icon red" *ngIf="form.get('exterior-checks.physical-damage')?.value === 'failed'">close</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'exterior_checks.physical_damage', $event)"
+                  [ngClass]="[form.get('exterior_checks.physical_damage')?.value === 'failed' ? 'failed' : 'stateless']">
+                     <mat-icon class="icon red" *ngIf="form.get('exterior_checks.physical_damage')?.value === 'failed'">close</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'exterior-checks.physical-damage', $event)"
-                  [ngClass]="[form.get('exterior-checks.physical-damage')?.value === 'na' ? 'na' : 'stateless']">
-                     <mat-icon class="icon black" *ngIf="form.get('exterior-checks.physical-damage')?.value === 'na'">block</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'exterior_checks.physical_damage', $event)"
+                  [ngClass]="[form.get('exterior_checks.physical_damage')?.value === 'na' ? 'na' : 'stateless']">
+                     <mat-icon class="icon black" *ngIf="form.get('exterior_checks.physical_damage')?.value === 'na'">block</mat-icon>
                   </div>
                </mat-radio-group>
             </div>
             <!-- /Physical Damage -->
             <mat-divider class="divider"></mat-divider>
             <!-- Leaking Fluids -->
-            <div class="status-inner" formGroupName="exterior-checks"
-               [ngClass]="[form.get('exterior-checks.leaking-fluids')?.value === 'checked' ? 'checked-row': '',
-               form.get('exterior-checks.leaking-fluids')?.value === 'failed' ? 'failed-row': '',
-               form.get('exterior-checks.leaking-fluids')?.value === 'na' ? 'na-row' : '']">
+            <div class="status-inner" formGroupName="exterior_checks"
+               [ngClass]="[form.get('exterior_checks.leaking_fluids')?.value === 'checked' ? 'checked-row': '',
+               form.get('exterior_checks.leaking_fluids')?.value === 'failed' ? 'failed-row': '',
+               form.get('exterior_checks.leaking_fluids')?.value === 'na' ? 'na-row' : '']">
                <span class="label">Leaking Fluids Underneath</span>
-               <mat-radio-group class="status-group" formControlName="leaking-fluids">
-                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'exterior-checks.leaking-fluids', $event)"
-                  [ngClass]="[form.get('exterior-checks.leaking-fluids')?.value === 'checked' ? 'checked' : 'stateless']">
-                     <mat-icon class="icon green" *ngIf="form.get('exterior-checks.leaking-fluids')?.value === 'checked'">check</mat-icon>
+               <mat-radio-group class="status-group" formControlName="leaking_fluids">
+                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'exterior_checks.leaking_fluids', $event)"
+                  [ngClass]="[form.get('exterior_checks.leaking_fluids')?.value === 'checked' ? 'checked' : 'stateless']">
+                     <mat-icon class="icon green" *ngIf="form.get('exterior_checks.leaking_fluids')?.value === 'checked'">check</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'exterior-checks.leaking-fluids', $event)"
-                  [ngClass]="[form.get('exterior-checks.leaking-fluids')?.value === 'failed' ? 'failed' : 'stateless']">
-                     <mat-icon class="icon red" *ngIf="form.get('exterior-checks.leaking-fluids')?.value === 'failed'">close</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'exterior_checks.leaking_fluids', $event)"
+                  [ngClass]="[form.get('exterior_checks.leaking_fluids')?.value === 'failed' ? 'failed' : 'stateless']">
+                     <mat-icon class="icon red" *ngIf="form.get('exterior_checks.leaking_fluids')?.value === 'failed'">close</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'exterior-checks.leaking-fluids', $event)"
-                  [ngClass]="[form.get('exterior-checks.leaking-fluids')?.value === 'na' ? 'na' : 'stateless']">
-                     <mat-icon class="icon black" *ngIf="form.get('exterior-checks.leaking-fluids')?.value === 'na'">block</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'exterior_checks.leaking_fluids', $event)"
+                  [ngClass]="[form.get('exterior_checks.leaking_fluids')?.value === 'na' ? 'na' : 'stateless']">
+                     <mat-icon class="icon black" *ngIf="form.get('exterior_checks.leaking_fluids')?.value === 'na'">block</mat-icon>
                   </div>
                </mat-radio-group>
             </div>
@@ -272,15 +272,15 @@
                <div class="status w-40">
                   <!-- Checked, failed & NA -->
                   <form [formGroup]="form" class="status w-100">
-                     <mat-radio-group class="status-group w-100" formControlName="under-hood-status">
-                        <div class="radio-wrapper checked" (click)="changeStatus('checked', 'under-hood-status', $event)">
-                           <mat-icon class="icon green" *ngIf="form.get('under-hood-status')?.value === 'checked'">check</mat-icon>
+                     <mat-radio-group class="status-group w-100" formControlName="under_hood_status">
+                        <div class="radio-wrapper checked" (click)="changeStatus('checked', 'under_hood_status', $event)">
+                           <mat-icon class="icon green" *ngIf="form.get('under_hood_status')?.value === 'checked'">check</mat-icon>
                         </div>
-                        <div class="radio-wrapper failed" (click)="changeStatus('failed', 'under-hood-status', $event)">
-                           <mat-icon class="icon red" *ngIf="form.get('under-hood-status')?.value === 'failed'">close</mat-icon>
+                        <div class="radio-wrapper failed" (click)="changeStatus('failed', 'under_hood_status', $event)">
+                           <mat-icon class="icon red" *ngIf="form.get('under_hood_status')?.value === 'failed'">close</mat-icon>
                         </div>
-                        <div class="radio-wrapper na" (click)="changeStatus('na', 'under-hood-status', $event)">
-                           <mat-icon class="icon black" *ngIf="form.get('under-hood-status')?.value === 'na'">block</mat-icon>
+                        <div class="radio-wrapper na" (click)="changeStatus('na', 'under_hood_status', $event)">
+                           <mat-icon class="icon black" *ngIf="form.get('under_hood_status')?.value === 'na'">block</mat-icon>
                         </div>
                      </mat-radio-group>
                   </form>
@@ -292,69 +292,69 @@
          <!-- Child custom radio buttons -->
          <form [formGroup]="form" class="content" >
             <!-- Vehicle Fluids -->
-            <div class="status-inner" formGroupName="under-hood-checks"
-               [ngClass]="[form.get('under-hood-checks.vehicle-fluids')?.value === 'checked' ? 'checked-row': '',
-               form.get('under-hood-checks.vehicle-fluids')?.value === 'failed' ? 'failed-row': '',
-               form.get('under-hood-checks.vehicle-fluids')?.value === 'na' ? 'na-row' : '']">
+            <div class="status-inner" formGroupName="under_hood_checks"
+               [ngClass]="[form.get('under_hood_checks.vehicle_fluids')?.value === 'checked' ? 'checked-row': '',
+               form.get('under_hood_checks.vehicle_fluids')?.value === 'failed' ? 'failed-row': '',
+               form.get('under_hood_checks.vehicle_fluids')?.value === 'na' ? 'na-row' : '']">
                <span class="label">Vehicle Fluids</span>
-               <mat-radio-group class="status-group" formControlName="vehicle-fluids">
-                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'under-hood-checks.vehicle-fluids', $event)"
-                  [ngClass]="[form.get('under-hood-checks.vehicle-fluids')?.value === 'checked' ? 'checked' : 'stateless']">
-                     <mat-icon class="icon green" *ngIf="form.get('under-hood-checks.vehicle-fluids')?.value === 'checked'">check</mat-icon>
+               <mat-radio-group class="status-group" formControlName="vehicle_fluids">
+                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'under_hood_checks.vehicle_fluids', $event)"
+                  [ngClass]="[form.get('under_hood_checks.vehicle_fluids')?.value === 'checked' ? 'checked' : 'stateless']">
+                     <mat-icon class="icon green" *ngIf="form.get('under_hood_checks.vehicle_fluids')?.value === 'checked'">check</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'under-hood-checks.vehicle-fluids', $event)"
-                  [ngClass]="[form.get('under-hood-checks.vehicle-fluids')?.value === 'failed' ? 'failed' : 'stateless']">
-                     <mat-icon class="icon red" *ngIf="form.get('under-hood-checks.vehicle-fluids')?.value === 'failed'">close</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'under_hood_checks.vehicle_fluids', $event)"
+                  [ngClass]="[form.get('under_hood_checks.vehicle_fluids')?.value === 'failed' ? 'failed' : 'stateless']">
+                     <mat-icon class="icon red" *ngIf="form.get('under_hood_checks.vehicle_fluids')?.value === 'failed'">close</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'under-hood-checks.vehicle-fluids', $event)"
-                  [ngClass]="[form.get('under-hood-checks.vehicle-fluids')?.value === 'na' ? 'na' : 'stateless']">
-                     <mat-icon class="icon black" *ngIf="form.get('under-hood-checks.vehicle-fluids')?.value === 'na'">block</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'under_hood_checks.vehicle_fluids', $event)"
+                  [ngClass]="[form.get('under_hood_checks.vehicle_fluids')?.value === 'na' ? 'na' : 'stateless']">
+                     <mat-icon class="icon black" *ngIf="form.get('under_hood_checks.vehicle_fluids')?.value === 'na'">block</mat-icon>
                   </div>
                </mat-radio-group>
             </div>
             <mat-divider class="divider"></mat-divider>
             <!-- /Engine Oil -->
             <!-- Coolant -->
-            <div class="status-inner" formGroupName="under-hood-checks"
-               [ngClass]="[form.get('under-hood-checks.windshield-fluid')?.value === 'checked' ? 'checked-row': '',
-               form.get('under-hood-checks.windshield-fluid')?.value === 'failed' ? 'failed-row': '',
-               form.get('under-hood-checks.windshield-fluid')?.value === 'na' ? 'na-row' : '']">
+            <div class="status-inner" formGroupName="under_hood_checks"
+               [ngClass]="[form.get('under_hood_checks.windshield_fluid')?.value === 'checked' ? 'checked-row': '',
+               form.get('under_hood_checks.windshield_fluid')?.value === 'failed' ? 'failed-row': '',
+               form.get('under_hood_checks.windshield_fluid')?.value === 'na' ? 'na-row' : '']">
                <span class="label">Windshield Fluids</span>
-               <mat-radio-group class="status-group" formControlName="windshield-fluid">
-                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'under-hood-checks.windshield-fluid', $event)"
-                  [ngClass]="[form.get('under-hood-checks.windshield-fluid')?.value === 'checked' ? 'checked' : 'stateless']">
-                     <mat-icon class="icon green" *ngIf="form.get('under-hood-checks.windshield-fluid')?.value === 'checked'">check</mat-icon>
+               <mat-radio-group class="status-group" formControlName="windshield_fluid">
+                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'under_hood_checks.windshield_fluid', $event)"
+                  [ngClass]="[form.get('under_hood_checks.windshield_fluid')?.value === 'checked' ? 'checked' : 'stateless']">
+                     <mat-icon class="icon green" *ngIf="form.get('under_hood_checks.windshield_fluid')?.value === 'checked'">check</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'under-hood-checks.windshield-fluid', $event)"
-                  [ngClass]="[form.get('under-hood-checks.windshield-fluid')?.value === 'failed' ? 'failed' : 'stateless']">
-                     <mat-icon class="icon red" *ngIf="form.get('under-hood-checks.windshield-fluid')?.value === 'failed'">close</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'under_hood_checks.windshield_fluid', $event)"
+                  [ngClass]="[form.get('under_hood_checks.windshield_fluid')?.value === 'failed' ? 'failed' : 'stateless']">
+                     <mat-icon class="icon red" *ngIf="form.get('under_hood_checks.windshield_fluid')?.value === 'failed'">close</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'under-hood-checks.windshield-fluid', $event)"
-                  [ngClass]="[form.get('under-hood-checks.windshield-fluid')?.value === 'na' ? 'na' : 'stateless']">
-                     <mat-icon class="icon black" *ngIf="form.get('under-hood-checks.windshield-fluid')?.value === 'na'">block</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'under_hood_checks.windshield_fluid', $event)"
+                  [ngClass]="[form.get('under_hood_checks.windshield_fluid')?.value === 'na' ? 'na' : 'stateless']">
+                     <mat-icon class="icon black" *ngIf="form.get('under_hood_checks.windshield_fluid')?.value === 'na'">block</mat-icon>
                   </div>
                </mat-radio-group>
             </div>
             <!-- /Coolant -->
             <mat-divider class="divider"></mat-divider>
             <!-- Battery Connections -->
-            <div class="status-inner" formGroupName="under-hood-checks"
-               [ngClass]="[form.get('under-hood-checks.battery-connections')?.value === 'checked' ? 'checked-row': '',
-               form.get('under-hood-checks.battery-connections')?.value === 'failed' ? 'failed-row': '',
-               form.get('under-hood-checks.battery-connections')?.value === 'na' ? 'na-row' : '']">
+            <div class="status-inner" formGroupName="under_hood_checks"
+               [ngClass]="[form.get('under_hood_checks.battery_connections')?.value === 'checked' ? 'checked-row': '',
+               form.get('under_hood_checks.battery_connections')?.value === 'failed' ? 'failed-row': '',
+               form.get('under_hood_checks.battery_connections')?.value === 'na' ? 'na-row' : '']">
                <span class="label">Battery Connections</span>
-               <mat-radio-group class="status-group" formControlName="battery-connections">
-                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'under-hood-checks.battery-connections', $event)"
-                  [ngClass]="[form.get('under-hood-checks.battery-connections')?.value === 'checked' ? 'checked' : 'stateless']">
-                     <mat-icon class="icon green" *ngIf="form.get('under-hood-checks.battery-connections')?.value === 'checked'">check</mat-icon>
+               <mat-radio-group class="status-group" formControlName="battery_connections">
+                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'under_hood_checks.battery_connections', $event)"
+                  [ngClass]="[form.get('under_hood_checks.battery_connections')?.value === 'checked' ? 'checked' : 'stateless']">
+                     <mat-icon class="icon green" *ngIf="form.get('under_hood_checks.battery_connections')?.value === 'checked'">check</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'under-hood-checks.battery-connections', $event)"
-                  [ngClass]="[form.get('under-hood-checks.battery-connections')?.value === 'failed' ? 'failed' : 'stateless']">
-                     <mat-icon class="icon red" *ngIf="form.get('under-hood-checks.battery-connections')?.value === 'failed'">close</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'under_hood_checks.battery_connections', $event)"
+                  [ngClass]="[form.get('under_hood_checks.battery_connections')?.value === 'failed' ? 'failed' : 'stateless']">
+                     <mat-icon class="icon red" *ngIf="form.get('under_hood_checks.battery_connections')?.value === 'failed'">close</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'under-hood-checks.battery-connections', $event)"
-                  [ngClass]="[form.get('under-hood-checks.battery-connections')?.value === 'na' ? 'na' : 'stateless']">
-                     <mat-icon class="icon black" *ngIf="form.get('under-hood-checks.battery-connections')?.value === 'na'">block</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'under_hood_checks.battery_connections', $event)"
+                  [ngClass]="[form.get('under_hood_checks.battery_connections')?.value === 'na' ? 'na' : 'stateless']">
+                     <mat-icon class="icon black" *ngIf="form.get('under_hood_checks.battery_connections')?.value === 'na'">block</mat-icon>
                   </div>
                </mat-radio-group>
             </div>
@@ -376,15 +376,15 @@
                   <div class="status w-40">
                      <!-- Checked, failed & NA -->
                      <form [formGroup]="form" class="status w-100">
-                        <mat-radio-group class="status-group w-100" formControlName="in-car-status">
-                           <div class="radio-wrapper checked" (click)="changeStatus('checked', 'in-car-status', $event)">
-                              <mat-icon class="icon green" *ngIf="form.get('in-car-status')?.value === 'checked'">check</mat-icon>
+                        <mat-radio-group class="status-group w-100" formControlName="in_car_status">
+                           <div class="radio-wrapper checked" (click)="changeStatus('checked', 'in_car_status', $event)">
+                              <mat-icon class="icon green" *ngIf="form.get('in_car_status')?.value === 'checked'">check</mat-icon>
                            </div>
-                           <div class="radio-wrapper failed" (click)="changeStatus('failed', 'in-car-status', $event)">
-                              <mat-icon class="icon red" *ngIf="form.get('in-car-status')?.value === 'failed'">close</mat-icon>
+                           <div class="radio-wrapper failed" (click)="changeStatus('failed', 'in_car_status', $event)">
+                              <mat-icon class="icon red" *ngIf="form.get('in_car_status')?.value === 'failed'">close</mat-icon>
                            </div>
-                           <div class="radio-wrapper na" (click)="changeStatus('na', 'in-car-status', $event)">
-                              <mat-icon class="icon black" *ngIf="form.get('in-car-status')?.value === 'na'">block</mat-icon>
+                           <div class="radio-wrapper na" (click)="changeStatus('na', 'in_car_status', $event)">
+                              <mat-icon class="icon black" *ngIf="form.get('in_car_status')?.value === 'na'">block</mat-icon>
                            </div>
                         </mat-radio-group>
                      </form>
@@ -396,23 +396,23 @@
          <!-- Child custom radio buttons -->
          <form [formGroup]="form" class="content">
             <!-- Engine Oil -->
-            <div class="status-inner" formGroupName="in-car-checks"
-               [ngClass]="[form.get('in-car-checks.warning-lights')?.value === 'checked' ? 'checked-row': '',
-               form.get('in-car-checks.warning-lights')?.value === 'failed' ? 'failed-row': '',
-               form.get('in-car-checks.warning-lights')?.value === 'na' ? 'na-row' : '']">
+            <div class="status-inner" formGroupName="in_car_checks"
+               [ngClass]="[form.get('in_car_checks.warning_lights')?.value === 'checked' ? 'checked-row': '',
+               form.get('in_car_checks.warning_lights')?.value === 'failed' ? 'failed-row': '',
+               form.get('in_car_checks.warning_lights')?.value === 'na' ? 'na-row' : '']">
                <span class="label">Warning Lights</span>
-               <mat-radio-group class="status-group" formControlName="warning-lights">
-                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'in-car-checks.warning-lights', $event)"
-                  [ngClass]="[form.get('in-car-checks.warning-lights')?.value === 'checked' ? 'checked' : 'stateless']">
-                     <mat-icon class="icon green" *ngIf="form.get('in-car-checks.warning-lights')?.value === 'checked'">check</mat-icon>
+               <mat-radio-group class="status-group" formControlName="warning_lights">
+                  <div class="radio-wrapper stateless" (click)="changeStatus('checked', 'in_car_checks.warning_lights', $event)"
+                  [ngClass]="[form.get('in_car_checks.warning_lights')?.value === 'checked' ? 'checked' : 'stateless']">
+                     <mat-icon class="icon green" *ngIf="form.get('in_car_checks.warning_lights')?.value === 'checked'">check</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'in-car-checks.warning-lights', $event)"
-                  [ngClass]="[form.get('in-car-checks.warning-lights')?.value === 'failed' ? 'failed' : 'stateless']">
-                     <mat-icon class="icon red" *ngIf="form.get('in-car-checks.warning-lights')?.value === 'failed'">close</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('failed', 'in_car_checks.warning_lights', $event)"
+                  [ngClass]="[form.get('in_car_checks.warning_lights')?.value === 'failed' ? 'failed' : 'stateless']">
+                     <mat-icon class="icon red" *ngIf="form.get('in_car_checks.warning_lights')?.value === 'failed'">close</mat-icon>
                   </div>
-                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'in-car-checks.warning-lights', $event)"
-                  [ngClass]="[form.get('in-car-checks.warning-lights')?.value === 'na' ? 'na' : 'stateless']">
-                     <mat-icon class="icon black" *ngIf="form.get('in-car-checks.warning-lights')?.value === 'na'">block</mat-icon>
+                  <div class="radio-wrapper stateless" (click)="changeStatus('na', 'in_car_checks.warning_lights', $event)"
+                  [ngClass]="[form.get('in_car_checks.warning_lights')?.value === 'na' ? 'na' : 'stateless']">
+                     <mat-icon class="icon black" *ngIf="form.get('in_car_checks.warning_lights')?.value === 'na'">block</mat-icon>
                   </div>
                </mat-radio-group>
             </div>
@@ -439,7 +439,7 @@
                </mat-radio-group>
             </div>
             <div class="check-container">
-               <mat-checkbox class="custom-checkbox" formControlName="requires-maintenance">Vehicle Requires Maintenance</mat-checkbox>
+               <mat-checkbox class="custom-checkbox" formControlName="requires_maintenance">Vehicle Requires Maintenance</mat-checkbox>
             </div>
          </div>
       </form>

@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 // Services
 import { ClientServiceService } from '../../shared/services/clients/client-service.service';
+import { SnackBarService } from '../../shared/services/snackbar/snack-bar.service';
 
 @Component({
   selector: 'app-trip-inspection',
@@ -60,6 +61,7 @@ export class TripInspectionComponent implements OnInit{
 
   constructor(
     private clientService: ClientServiceService,
+    private snackBarService: SnackBarService
   ) { }
 
   ngOnInit(): void {
@@ -70,38 +72,40 @@ export class TripInspectionComponent implements OnInit{
       console.log(this.clients)
     });
     // Get client by id
-    this.clientService.getClient(1).subscribe((client) => {
+    this.clientService.getClient(2).subscribe((client) => {
       console.log(client);
       this.client = client;
+      this.form.patchValue(client);
+      console.log(this.form.value);
     });
   }
 
   public initForm() {
     this.form = this.fb.group({
-      'trip': ['pre-trip', Validators.required],
+      'trip': ['pre_trip', Validators.required],
       'odometer': [''],
       'address': [''],
-      'exterior-status': [''],
-      'exterior-checks': this.fb.group({
+      'exterior_status': [''],
+      'exterior_checks': this.fb.group({
         'tires': [''],
-        'spare-wheel': [''],
+        'spare_wheel': [''],
         'lights': [''],
-        'physical-damage': [''],
-        'leaking-fluids': [''],
+        'physical_damage': [''],
+        'leaking_fluids': [''],
       }),
-      'under-hood-status': [''],
-      'under-hood-checks': this.fb.group({
-        'vehicle-fluids': [''],
-        'windshield-fluid': [''],
-        'battery-connections': [''],
+      'under_hood_status': [''],
+      'under_hood_checks': this.fb.group({
+        'vehicle_fluids': [''],
+        'windshield_fluid': [''],
+        'battery_connections': [''],
       }),
-      'in-car-status': [''],
-      'in-car-checks': this.fb.group({
-        'warning-lights': [''],
+      'in_car_status': [''],
+      'in_car_checks': this.fb.group({
+        'warning_lights': [''],
       }),
       'notes': [''],
       'operational': [true],
-      'requires-maintenance': [false],
+      'requires_maintenance': [false],
     });
   }
 
@@ -124,38 +128,38 @@ export class TripInspectionComponent implements OnInit{
     // prevent the expansion panel from opening when clicking the radio button
     event.stopPropagation();
     // if one child status is changed, remove main status
-    if (formControl === 'exterior-checks.tires' || formControl === 'exterior-checks.spare-wheel' || formControl === 'exterior-checks.lights' || formControl === 'exterior-checks.physical-damage' || formControl === 'exterior-checks.leaking-fluids') {
-      this.form.get('exterior-status')?.setValue('');
+    if (formControl === 'exterior_checks.tires' || formControl === 'exterior_checks.spare_wheel' || formControl === 'exterior_checks.lights' || formControl === 'exterior_checks.physical_damage' || formControl === 'exterior_checks.leaking_fluids') {
+      this.form.get('exterior_status')?.setValue('');
     }
-    if (formControl === 'under-hood-checks.vehicle-fluids' || formControl === 'under-hood-checks.windshield-fluid' || formControl === 'under-hood-checks.battery-connections') {
-      this.form.get('under-hood-status')?.setValue('');
+    if (formControl === 'under_hood_checks.vehicle_fluids' || formControl === 'under_hood_checks.windshield_fluid' || formControl === 'under_hood_checks.battery_connections') {
+      this.form.get('under_hood_status')?.setValue('');
     }
-    if (formControl === 'in-car-checks.warning-lights') {
-      // This because there is no other check in the in-car-checks group
-      this.form.get('in-car-status')?.setValue(status);
-      this.form.get('in-car-checks.warning-lights')?.setValue(status);
+    if (formControl === 'in_car_checks.warning_lights') {
+      // This because there is no other check in the in_car_checks group
+      this.form.get('in_car_status')?.setValue(status);
+      this.form.get('in_car_checks.warning_lights')?.setValue(status);
     }
     else {
       this.form.get(formControl)?.setValue(status);
     }
     // if the form control is the main status, set all the checks to the same status
-    if (formControl === 'exterior-status') {
-      this.form.get('exterior-checks')?.setValue({
+    if (formControl === 'exterior_status') {
+      this.form.get('exterior_checks')?.setValue({
         'tires': status,
-        'spare-wheel': status,
+        'spare_wheel': status,
         'lights': status,
-        'physical-damage': status,
-        'leaking-fluids': status,
+        'physical_damage': status,
+        'leaking_fluids': status,
       });
-    } else if (formControl === 'under-hood-status') {
-      this.form.get('under-hood-checks')?.setValue({
-        'vehicle-fluids': status,
-        'windshield-fluid': status,
-        'battery-connections': status,
+    } else if (formControl === 'under_hood_status') {
+      this.form.get('under_hood_checks')?.setValue({
+        'vehicle_fluids': status,
+        'windshield_fluid': status,
+        'battery_connections': status,
       });
-    } else if (formControl === 'in-car-status') {
-      this.form.get('in-car-checks')?.setValue({
-        'warning-lights': status,
+    } else if (formControl === 'in_car_status') {
+      this.form.get('in_car_checks')?.setValue({
+        'warning_lights': status,
       });
     }
   }
@@ -167,7 +171,7 @@ export class TripInspectionComponent implements OnInit{
     console.log(this.client);
     this.clientService.updateClient(this.client).subscribe((response) => {
       if (response === null) {
-        console.log("Client updated")
+        this.snackBarService.show("Client updated", 'Close', 3000, 'success');
       }
     });
 
@@ -175,7 +179,6 @@ export class TripInspectionComponent implements OnInit{
     this.clientService.getClient(1).subscribe((response) => {
       console.log(response);
       if (response) {
-        console.log("Client found")
         this.client = response;
       }
     });
